@@ -1,0 +1,30 @@
+(function(){
+  const KEY='mathsversity-session-v1';
+  const defaults={name:'Alex Smith',classLevel:'5',minutes:28,streak:4,hearts:3,joinedAt:Date.now()};
+  const load=()=>{try{return {...defaults,...JSON.parse(sessionStorage.getItem(KEY)||'{}')}}catch{return {...defaults}}};
+  let user=load();
+  const save=()=>sessionStorage.setItem(KEY,JSON.stringify(user));
+  const initials=name=>name.trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'AS';
+  const $=id=>document.getElementById(id);
+  const sync=()=>{
+    const short=initials(user.name);
+    if($('sidebarAvatar'))$('sidebarAvatar').textContent=short;
+    if($('panelAvatar'))$('panelAvatar').textContent=short;
+    if($('sidebarName'))$('sidebarName').textContent=user.name;
+    if($('sidebarClass'))$('sidebarClass').textContent=`Class ${user.classLevel} · Explorer`;
+    if($('nameInput'))$('nameInput').value=user.name;
+    if($('classInput'))$('classInput').value=user.classLevel;
+    if($('panelMinutes'))$('panelMinutes').textContent=user.minutes;
+    if($('panelStreak'))$('panelStreak').textContent=user.streak;
+    if($('panelHearts'))$('panelHearts').textContent=user.hearts;
+  };
+  const open=()=>{$('userOverlay').hidden=false;document.body.style.overflow='hidden';$('nameInput')?.focus()};
+  const close=()=>{$('userOverlay').hidden=true;document.body.style.overflow=''};
+  $('profileTrigger')?.addEventListener('click',open);
+  $('closeUserPanel')?.addEventListener('click',close);
+  $('userOverlay')?.addEventListener('click',e=>{if(e.target.id==='userOverlay')close()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('userOverlay')?.hidden)close()});
+  $('profileForm')?.addEventListener('submit',e=>{e.preventDefault();user.name=$('nameInput').value.trim();user.classLevel=$('classInput').value;save();sync();close();window.dispatchEvent(new CustomEvent('user-profile-updated'))});
+  $('resetUser')?.addEventListener('click',()=>{if(confirm('Reset your saved Mathsversity progress?')){user={...defaults,name:user.name,classLevel:user.classLevel};save();sync()}});
+  sync();
+})();
