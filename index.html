@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8fafc" />
+  <title>Mathsversity — Make maths click.</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="user-system.css" />
+  <link rel="stylesheet" href="freemium-modal.css" />
+<link rel="stylesheet" href="theme.css"></head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Mathsversity home">
+        <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+        <span>maths<span>versity</span></span>
+      </a>
+      <div class="nav-group-label">LEARN</div>
+      <nav class="primary-nav">
+        <a class="nav-item active" href="#top"><span class="nav-icon">⌂</span>Overview</a>
+        <a class="nav-item" href="#continue"><span class="nav-icon">◉</span>My lessons</a>
+        <a class="nav-item" href="classes.html"><span class="nav-icon">⌕</span>Explore</a>
+      </nav>
+      <div class="nav-group-label">YOUR SPACE</div>
+      <nav class="primary-nav">
+        <a class="nav-item" href="#practice"><span class="nav-icon">✦</span>Practice</a>
+        <a class="nav-item" href="#badges"><span class="nav-icon">♢</span>Badges</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-spark">✦</span><strong>Need a little help?</strong><small>Ask a grown-up to join you.</small><button>Learn more <span>↗</span></button></div>
+        <a class="nav-item" href="#settings"><span class="nav-icon">⚙</span>Settings</a>
+        <button class="profile-mini" id="profileTrigger" type="button"><div class="avatar" id="sidebarAvatar">AS</div><div><strong id="sidebarName">Alex Smith</strong><small id="sidebarClass">Class 5 · Explorer</small></div><span class="dots">•••</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="top">
+      <header class="topbar">
+        <button class="mobile-menu" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><span>Overview</span><b>/</b> Good morning, Alex!</div>
+        <div class="top-actions"><a class="premium-btn" href="premium.html">Buy Premium <span>→</span></a><div class="streak"><span>♨</span><strong>4</strong><small>day streak</small></div><div class="hearts" data-mv-hearts aria-label="3 of 3 energy hearts remaining">♥ ♥ ♥</div><button class="notification" aria-label="Notifications">♧<b></b></button></div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="welcome-row">
+          <div><p class="eyebrow">THURSDAY, 24 APRIL</p><h1>Ready to make<br /><em>maths click?</em></h1><p class="welcome-copy">A few minutes of practice today keeps your<br class="desktop-only" /> math muscles growing strong.</p><a class="browse-classes" href="classes.html">Browse all classes <span>→</span></a></div>
+          <div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div><div class="hill hill-one"></div><div class="hill hill-two"></div><div class="tiny-planet">+ <span>÷</span> −</div><div class="character"><div class="char-head">✦</div><div class="char-body"></div><div class="char-foot left"></div><div class="char-foot right"></div></div><div class="floating-block block-one">3</div><div class="floating-block block-two">×</div></div>
+        </section>
+
+        <section class="stats-grid" aria-label="Your progress">
+          <article class="stat-card"><div class="stat-icon blue-icon">◉</div><div><small>THIS WEEK</small><strong>28 <span>min</span></strong><p><b class="green-text">↑ 12%</b> from last week</p></div><div class="mini-bars"><i></i><i></i><i></i><i class="selected"></i><i></i><i></i><i></i></div></article>
+          <article class="stat-card"><div class="stat-icon orange-icon">✦</div><div><small>CONCEPTS MASTERED</small><strong>12 <span>/ 20</span></strong><p><b class="green-text">+3</b> this week</p></div><div class="progress-ring"><span>60%</span></div></article>
+          <article class="stat-card"><div class="stat-icon purple-icon">♢</div><div><small>BADGES EARNED</small><strong>6 <span>badges</span></strong><p>Keep exploring!</p></div><div class="badge-dots">✦ ✦ ✦</div></article>
+        </section>
+
+        <section class="section-block" id="continue"><div class="section-heading"><div><p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p><h2>Continue learning</h2></div><a href="#explore">See all lessons <span>→</span></a></div>
+        <article class="lesson-feature"><div class="lesson-illustration fraction-illustration"><div class="pie"><i></i><i></i><i></i><i></i></div><span class="spark s1">✦</span><span class="spark s2">✧</span></div><div class="lesson-detail"><div class="pill blue-pill">CLASS 5 · FRACTIONS</div><h3>Fractions in the real world</h3><p>See how fractions fit together using pizza, bars, and more.</p><div class="lesson-progress"><span><b>Lesson 3</b> of 6</span><div class="line"><i style="width:48%"></i></div><span>48%</span></div><a class="primary-btn" id="resumeBtn" href="class-5.html">Continue lesson <span>→</span></a></div><div class="lesson-side-note"><div class="play-dot">▶</div><small>Last session</small><strong>Yesterday</strong></div></article>
+        </section>
+
+        <section class="section-block" id="explore"><div class="section-heading"><div><p class="eyebrow">EXPLORE & DISCOVER</p><h2>Try something new</h2></div><div class="carousel-controls"><button aria-label="Previous">←</button><button aria-label="Next">→</button></div></div><div class="lesson-grid"><article class="lesson-card teal-card"><div class="card-art array-art"><div class="array-grid">•••<br/>•••<br/>•••</div><span>×</span></div><div class="pill">CLASS 3 · MULTIPLICATION</div><h3>Build an array</h3><p>Turn groups into multiplication.</p><button class="text-btn">Start exploring <span>→</span></button></article><article class="lesson-card purple-card"><div class="card-art line-art"><div class="number-line"><i></i><i></i><i></i><i></i><i></i></div><span>−2</span></div><div class="pill">CLASS 6 · INTEGERS</div><h3>Number line adventure</h3><p>Jump, compare, and conquer integers.</p><button class="text-btn">Start exploring <span>→</span></button></article><article class="lesson-card yellow-card"><div class="card-art clock-art"><div class="clock"><i></i><b></b></div></div><div class="pill">CLASS 4 · TIME</div><h3>Race the clock</h3><p>Can you beat the minute hand?</p><button class="text-btn">Start exploring <span>→</span></button></article></div></section>
+
+        <section class="practice-panel" id="practice"><div><p class="eyebrow">A QUICK WIN</p><h2>Warm up your brain</h2><p>Drag the pieces to make one whole.</p><div class="fraction-challenge"><div class="fraction-target"><span id="targetCount">0</span><small>/ 4 pieces</small></div><div class="fraction-pieces" id="fractionPieces"><button class="piece piece-a" data-piece="1" aria-label="One quarter"></button><button class="piece piece-b" data-piece="2" aria-label="One quarter"></button><button class="piece piece-c" data-piece="3" aria-label="One quarter"></button><button class="piece piece-d" data-piece="4" aria-label="One quarter"></button></div><button class="check-btn" id="checkBtn">Check my answer</button></div></div><div class="practice-art"><div class="equation">¼ + ¼ + ¼ + ¼ <strong>= 1</strong></div><span class="practice-star">✦</span></div></section>
+      </div>
+      <footer><span>Made for curious minds</span><span>© 2024 Mathsversity</span><span>Parent corner ↗</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status">Great work! You made a whole. ✦</div>
+  <div class="user-overlay" id="userOverlay" hidden><section class="user-panel" role="dialog" aria-modal="true" aria-labelledby="userPanelTitle"><button class="user-close" id="closeUserPanel" type="button" aria-label="Close profile">×</button><div class="user-panel-head"><div class="large-avatar" id="panelAvatar">AS</div><div><p class="eyebrow">YOUR LEARNING SPACE</p><h2 id="userPanelTitle">Your profile</h2><p>Small steps. Big progress.</p></div></div><div class="user-stats"><div><strong id="panelMinutes">28</strong><small>minutes this week</small></div><div><strong id="panelStreak">4</strong><small>day streak</small></div><div><strong id="panelHearts">3</strong><small>energy hearts</small></div></div><form id="profileForm"><label>Your name<input id="nameInput" maxlength="24" required></label><label>Your class<select id="classInput"><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option></select></label><div class="user-panel-actions"><a class="account-link" href="login.html">Open account login</a><button class="secondary-btn" type="button" id="resetUser">Reset progress</button><button class="primary-btn" type="submit">Save profile</button></div></form></section></div>
+  <script src="app.js"></script>
+  <script src="user-system.js"></script>
+  <script src="freemium.js"></script>
+<script src="theme.js"></script></body>
+</html>

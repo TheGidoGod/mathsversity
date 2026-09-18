@@ -1,0 +1,226 @@
+html {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  --ink: #e7edf8;
+  --navy: #f0f5ff;
+  --muted: #aab7c9;
+  --line: #263449;
+  --blue: #7ea2ff;
+  --green: #4fd097;
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] body {
+  background: #101722;
+  color: var(--ink);
+}
+
+.mv-theme-toggle {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--ink);
+  display: inline-grid;
+  place-items: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(30, 52, 89, 0.08);
+  flex: 0 0 44px;
+}
+
+.mv-theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+html[data-theme="dark"] .mv-theme-toggle {
+  background: #172234;
+  color: #f7d77a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+}
+
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .lesson-card,
+html[data-theme="dark"] .tool-shell,
+html[data-theme="dark"] .class-card,
+html[data-theme="dark"] .tool-card,
+html[data-theme="dark"] .plan-card,
+html[data-theme="dark"] .auth-card,
+html[data-theme="dark"] .user-panel,
+html[data-theme="dark"] .mv-modal-card {
+  background: #172234;
+  border-color: var(--line);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="dark"] .brand,
+html[data-theme="dark"] .sub-brand,
+html[data-theme="dark"] .logo,
+html[data-theme="dark"] .tool-shell h1,
+html[data-theme="dark"] .catalog-hero h1,
+html[data-theme="dark"] .welcome-row h1,
+html[data-theme="dark"] .section-heading h2,
+html[data-theme="dark"] .tool-toolbar h2,
+html[data-theme="dark"] .lesson-detail h3,
+html[data-theme="dark"] .lesson-card h3,
+html[data-theme="dark"] .class-card h2,
+html[data-theme="dark"] .tool-card h3,
+html[data-theme="dark"] .plan-card h2,
+html[data-theme="dark"] .auth-heading h2,
+html[data-theme="dark"] .user-panel h2,
+html[data-theme="dark"] .user-stats strong {
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .app-shell .brand > span:last-child,
+html[data-theme="dark"] .logo > span:last-child {
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .app-shell .brand > span:last-child span,
+html[data-theme="dark"] .logo > span:last-child span,
+html[data-theme="dark"] .tool-page .brand > span:last-child {
+  color: var(--blue);
+}
+
+html[data-theme="dark"] .catalog .sub-brand > span:last-child,
+html[data-theme="dark"] .class-page .sub-brand > span:last-child {
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .breadcrumb span,
+html[data-theme="dark"] .back,
+html[data-theme="dark"] .back-link,
+html[data-theme="dark"] .welcome-copy,
+html[data-theme="dark"] .lesson-detail p,
+html[data-theme="dark"] .lesson-card p,
+html[data-theme="dark"] .class-card p,
+html[data-theme="dark"] .tool-card p,
+html[data-theme="dark"] .catalog-hero p:last-child,
+html[data-theme="dark"] .premium-hero > p:not(.eyebrow),
+html[data-theme="dark"] .parent-note p,
+html[data-theme="dark"] .brand-copy > p:not(.eyebrow),
+html[data-theme="dark"] .auth-heading > p:last-child,
+html[data-theme="dark"] .tool-shell p,
+html[data-theme="dark"] footer,
+html[data-theme="dark"] .mv-modal-card p,
+html[data-theme="dark"] .profile-mini small,
+html[data-theme="dark"] .privacy-note,
+html[data-theme="dark"] .encryption-note {
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .nav-item {
+  color: #b4c0d0;
+}
+
+html[data-theme="dark"] .nav-item.active,
+html[data-theme="dark"] .filter.active {
+  background: #20355b;
+  border-color: #34558f;
+  color: #9db8ff;
+}
+
+html[data-theme="dark"] .profile-mini:hover {
+  background: #111a28;
+}
+
+html[data-theme="dark"] .profile-mini strong {
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .help-card,
+html[data-theme="dark"] .parent-note,
+html[data-theme="dark"] .lesson-feature,
+html[data-theme="dark"] .try-panel {
+  background: #1d2b42;
+  border-color: var(--line);
+}
+
+html[data-theme="dark"] .class-hero,
+html[data-theme="dark"] .practice-panel,
+html[data-theme="dark"] .premium-toast {
+  background: #0c1320;
+}
+
+html[data-theme="dark"] .filter,
+html[data-theme="dark"] .carousel-controls button,
+html[data-theme="dark"] .secondary-plan,
+html[data-theme="dark"] .auth-tabs,
+html[data-theme="dark"] .field input,
+html[data-theme="dark"] .field select,
+html[data-theme="dark"] .user-panel input,
+html[data-theme="dark"] .user-panel select,
+html[data-theme="dark"] .library,
+html[data-theme="dark"] .demo-chip,
+html[data-theme="dark"] .mv-energy-strip,
+html[data-theme="dark"] .user-close,
+html[data-theme="dark"] .mv-modal-close {
+  background: #111a28;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .auth-tab.active,
+html[data-theme="dark"] .play-dot,
+html[data-theme="dark"] .note-icon,
+html[data-theme="dark"] .array-grid,
+html[data-theme="dark"] .clock,
+html[data-theme="dark"] .cloud,
+html[data-theme="dark"] .cloud::before,
+html[data-theme="dark"] .cloud::after {
+  background: #243450;
+}
+
+html[data-theme="dark"] .tool-icon,
+html[data-theme="dark"] .class-num,
+html[data-theme="dark"] .avatar,
+html[data-theme="dark"] .large-avatar,
+html[data-theme="dark"] .popular {
+  background: #20355b;
+  color: #9db8ff;
+}
+
+html[data-theme="dark"] .fraction-illustration,
+html[data-theme="dark"] .teal-card .card-art,
+html[data-theme="dark"] .purple-card .card-art,
+html[data-theme="dark"] .yellow-card .card-art {
+  background: #132338;
+}
+
+html[data-theme="dark"] .primary-btn,
+html[data-theme="dark"] .check-btn,
+html[data-theme="dark"] .premium-btn,
+html[data-theme="dark"] .primary-plan,
+html[data-theme="dark"] .auth-submit,
+html[data-theme="dark"] .mv-btn-primary {
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .mv-modal-overlay,
+html[data-theme="dark"] .user-overlay {
+  background: rgba(5, 10, 18, 0.72);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --ink: #e7edf8;
+    --navy: #f0f5ff;
+    --muted: #aab7c9;
+    --line: #263449;
+    --blue: #7ea2ff;
+    --green: #4fd097;
+    color-scheme: dark;
+  }
+
+  html:not([data-theme="light"]) body {
+    background: #101722;
+    color: var(--ink);
+  }
+}
