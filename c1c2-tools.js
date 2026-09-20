@@ -206,11 +206,6 @@
 
   function bindCheck(check, reset) {
     document.getElementById("checkTool").onclick = () => {
-      const freemium = window.mathsversityFreemium;
-      if (freemium && !freemium.canPlay()) {
-        freemium.showParentModal();
-        return;
-      }
       check();
     };
     document.getElementById("resetTool").onclick = reset || (() => tool.render());

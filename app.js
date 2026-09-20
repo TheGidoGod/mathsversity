@@ -12,7 +12,6 @@ pieces.forEach(piece => piece.addEventListener('click', () => {
 }));
 document.getElementById('checkBtn').addEventListener('click', () => {
   const freemium = window.mathsversityFreemium;
-  if (freemium && !freemium.canPlay()) { freemium.showParentModal(); return; }
   const selected = document.querySelectorAll('.piece.selected').length;
   toast.textContent = selected === 4 ? 'Great work! You made a whole. ✦' : `You have ${selected} piece${selected === 1 ? '' : 's'} — keep going!`;
   toast.classList.add('show');

@@ -12,7 +12,7 @@ Mathsversity is a playful, browser-based maths learning experience for learners 
 - Light and dark themes with the selection saved in the browser.
 - Local profile and progress state using `localStorage`.
 - Optional local account registration and sign-in using browser-side AES-GCM encryption.
-- Freemium energy-heart system with daily reset and a premium upgrade modal.
+- Unlimited practice with the energy-heart display retained for progress feedback.
 
 ## Deploy with GitHub Pages
 
@@ -69,7 +69,7 @@ Then visit [http://localhost:8000](http://localhost:8000).
 - `c1c2-tools.js`, `c3c4-tools.js`, `c5c6-tools.js`, and `c7c8-tools.js` power the interactive lesson activities.
 - `auth.js` handles local account creation, sign-in, encryption, and CSV backup download.
 - `user-system.js` manages the learner profile and dashboard progress state.
-- `freemium.js` manages energy hearts, attempts, and the upgrade prompt.
+- `freemium.js` tracks practice attempts and keeps the energy-heart display available for future product changes.
 - `theme.js` manages themes and loads optional activity libraries from CDNs.
 
 ## External libraries
@@ -89,7 +89,7 @@ An internet connection is needed for activities that use these CDN-hosted librar
 
 Profile, progress, theme, and freemium state are stored locally in the browser. Account records are encrypted with AES-GCM before being stored in `localStorage`; registration also downloads an encrypted CSV backup. No password is sent to a server by this static demo.
 
-The premium buttons currently display a checkout-coming-soon message and do not process payments.
+The premium page is retained as an unlinked future feature. It is not part of the current learning flow and no payments are processed.
 
 ## Browser support
 
