@@ -28,6 +28,9 @@
   const root = document.getElementById("toolApp");
   if (!tool || !root) return;
   let score = 0;
+  let tries = 0;
+  let streak = 0;
+  let roundSolved = false;
   const r = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const visualStyle = (question) => { let hash = 0; for (const char of question) hash = (hash * 31 + char.charCodeAt(0)) >>> 0; return `--visual-hue:${hash % 30}deg;--visual-tilt:${hash % 3 - 1}deg;--visual-scale:${0.96 + (hash % 5) / 100}`; };
   const round = () => {
@@ -110,13 +113,14 @@
     const [question, answer, options] = round();
     const visualVariant = r(0, 2);
     document.title = `${title} · Class ${key[0]} · Mathsversity`;
-    root.innerHTML = `<div class="tool-head"><div><p class="eyebrow">CLASS ${key[0]} · ${topic.toUpperCase()}</p><h1>${title}</h1><p>${intro}</p></div><div class="score-pill"><span>Score</span><strong id="score">${score}</strong></div></div><div class="tool-board"><div class="prompt-card"><strong>${question}</strong><span>Select the answer after studying the model.</span></div><div class="quiz-graphic visual-${visualVariant}" style="${visualStyle(question)}">${graphic(question)}</div><div class="choice-row">${options.map((option) => `<button class="choice" type="button" data-answer="${option}">${option}</button>`).join("")}</div></div><div class="tool-actions"><button class="tool-btn" id="checkTool" type="button">Check answer</button><button class="tool-btn secondary" id="resetTool" type="button">New round</button><span class="feedback" id="feedback">Choose an answer.</span></div>`;
+    root.innerHTML = `<div class="tool-head"><div><p class="eyebrow">CLASS ${key[0]} · ${topic.toUpperCase()}</p><h1>${title}</h1><p>${intro}</p></div><div class="score-pill"><span>Score</span><strong id="score">${score}</strong><small class="score-meta" id="scoreMeta">Streak ${streak} · Tries ${tries}</small></div></div><div class="tool-board"><div class="prompt-card"><strong>${question}</strong><span>Select the answer after studying the model.</span></div><div class="quiz-graphic visual-${visualVariant}" style="${visualStyle(question)}">${graphic(question)}</div><div class="choice-row">${options.map((option) => `<button class="choice" type="button" data-answer="${option}">${option}</button>`).join("")}</div></div><div class="tool-actions"><button class="tool-btn" id="checkTool" type="button">Check answer</button><button class="tool-btn secondary" id="resetTool" type="button">New round</button><span class="feedback" id="feedback">Choose an answer.</span></div>`;
     document.querySelectorAll(".choice").forEach((button) => button.onclick = () => { document.querySelectorAll(".choice").forEach((item) => item.classList.remove("selected")); button.classList.add("selected"); });
+    roundSolved = false;
     document.getElementById("checkTool").onclick = () => {
       const selected = document.querySelector(".choice.selected")?.dataset.answer;
       const feedback = document.getElementById("feedback");
-      if (selected === answer) { score += 1; document.getElementById("score").textContent = score; window.mathsversityFreemium?.consumeHeart(); window.mathsversityCelebrate?.(); feedback.textContent = `Correct — ${answer}.`; feedback.className = "feedback good"; }
-      else { feedback.textContent = selected ? "Not quite. Read the question and try again." : "Choose an answer first."; feedback.className = "feedback try"; }
+      if (selected === answer && !roundSolved) { roundSolved = true; score += 1; streak += 1; document.getElementById("score").textContent = score; document.getElementById("scoreMeta").textContent = `Streak ${streak} · Tries ${tries}`; document.getElementById("checkTool").disabled = true; document.getElementById("checkTool").textContent = "Solved!"; window.mathsversityFreemium?.consumeHeart(); window.mathsversityCelebrate?.(); feedback.textContent = `Correct — ${answer}.`; feedback.className = "feedback good"; }
+      else { tries += 1; streak = 0; document.getElementById("scoreMeta").textContent = `Streak ${streak} · Tries ${tries}`; feedback.textContent = selected ? "Not quite. Read the question and try again." : "Choose an answer first."; feedback.className = "feedback try"; }
     };
     document.getElementById("resetTool").onclick = render;
     window.mathsversityLibraries?.ready.then(() => window.MathJax?.typesetPromise?.([root]));

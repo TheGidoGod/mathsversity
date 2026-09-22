@@ -44,6 +44,15 @@
   font-size: 22px;
 }
 
+.score-meta {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .tool-board {
   background: #f8fafc;
   border: 1px solid var(--line);
@@ -318,6 +327,36 @@
   border-bottom: 58px solid #f6be62;
   background: transparent;
   border-radius: 0;
+}
+
+.shape.triangle.selected,
+.shape.triangle.matched {
+  width: 0;
+  height: 0;
+  min-height: 0;
+  background: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+.shape.triangle.selected {
+  border-bottom-color: var(--blue) !important;
+}
+
+.shape.triangle.matched {
+  border-bottom-color: var(--green) !important;
+}
+
+.shape.circle.matched {
+  background: #72c6a3 !important;
+}
+
+.shape.square.matched {
+  background: #7796e6 !important;
+}
+
+.shape.rectangle.matched {
+  background: #ef9d9e !important;
 }
 
 .shape.rectangle {

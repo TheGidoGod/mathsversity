@@ -168,6 +168,9 @@
   if (!tool || !root) return;
 
   let score = 0;
+  let tries = 0;
+  let streak = 0;
+  let roundSolved = false;
 
   function shell(board) {
     document.title = `${tool.title} · Class ${tool.grade} · Mathsversity`;
@@ -178,7 +181,7 @@
           <h1>${tool.title}</h1>
           <p>${tool.intro}</p>
         </div>
-        <div class="score-pill"><span>Score</span><strong id="score">${score}</strong></div>
+        <div class="score-pill"><span>Score</span><strong id="score">${score}</strong><small class="score-meta" id="scoreMeta">Streak 0 · Tries 0</small></div>
       </div>
       <div class="tool-board">${board}</div>
       <div class="tool-actions">
@@ -194,17 +197,37 @@
     const el = document.getElementById("feedback");
     el.textContent = message;
     el.className = `feedback ${good ? "good" : "try"}`;
+    if (!good) {
+      tries += 1;
+      streak = 0;
+      updateRunStats();
+    }
+  }
+
+  function updateRunStats() {
+    const meta = document.getElementById("scoreMeta");
+    if (meta) meta.textContent = `Streak ${streak} · Tries ${tries}`;
   }
 
   function award(message) {
+    if (roundSolved) return;
+    roundSolved = true;
     score += 1;
+    streak += 1;
     document.getElementById("score").textContent = score;
+    updateRunStats();
+    const checkButton = document.getElementById("checkTool");
+    if (checkButton) {
+      checkButton.disabled = true;
+      checkButton.textContent = "Solved!";
+    }
     window.mathsversityFreemium?.consumeHeart();
     setFeedback(message, true);
     window.mathsversityCelebrate?.();
   }
 
   function bindCheck(check, reset) {
+    roundSolved = false;
     document.getElementById("checkTool").onclick = () => {
       check();
     };
@@ -386,16 +409,21 @@
 
   function simpleClock() {
     let hour = rand(1, 12);
-    const target = rand(1, 12);
-    if (hour === target) hour = hour === 12 ? 1 : hour + 1;
-    shell(`<div class="prompt-card"><strong>Show ${target} o'clock</strong><span>Move the hour hand.</span></div>${clockMarkup()}<input id="hourRange" type="range" min="1" max="12" value="${hour}"><div class="choice-row"><span class="feedback">Hour: <strong id="hourRead">${hour}</strong></span></div>`);
+    let minute = rand(0, 11) * 5;
+    const targetHour = rand(1, 12);
+    const targetMinute = rand(0, 11) * 5;
+    if (hour === targetHour && minute === targetMinute) hour = hour === 12 ? 1 : hour + 1;
+    const formatTime = (h, m) => `${h}:${String(m).padStart(2, "0")}`;
+    shell(`<div class="prompt-card"><strong>Show ${formatTime(targetHour, targetMinute)}</strong><span>Set both the hour and minute hands.</span></div>${clockMarkup()}<label>Hour <input id="hourRange" type="range" min="1" max="12" value="${hour}"></label><label>Minutes <input id="minuteRange" type="range" min="0" max="55" step="5" value="${minute}"></label><div class="choice-row"><span class="feedback">Time: <strong id="timeRead">${formatTime(hour, minute)}</strong></span></div>`);
     const render = () => {
-      document.querySelector(".hour-hand").style.transform = `rotate(${hour * 30}deg)`;
-      document.getElementById("hourRead").textContent = hour;
+      document.querySelector(".hour-hand").style.transform = `rotate(${hour * 30 + minute * 0.5}deg)`;
+      document.querySelector(".minute-hand").style.transform = `rotate(${minute * 6}deg)`;
+      document.getElementById("timeRead").textContent = formatTime(hour, minute);
     };
     document.getElementById("hourRange").oninput = (e) => { hour = Number(e.target.value); render(); };
+    document.getElementById("minuteRange").oninput = (e) => { minute = Number(e.target.value); render(); };
     render();
-    bindCheck(() => hour === target ? award(`That shows ${target} o'clock.`) : setFeedback(`Move the short hand to ${target}.`, false));
+    bindCheck(() => hour === targetHour && minute === targetMinute ? award(`That shows ${formatTime(targetHour, targetMinute)}.`) : setFeedback(`Set both hands to ${formatTime(targetHour, targetMinute)}.`, false));
   }
 
   function coinRecognition() {

@@ -30,16 +30,20 @@
   if (!definition || !root) return;
   const [grade, title, topic, intro, render] = definition;
   let score = 0;
+  let tries = 0;
+  let streak = 0;
+  let roundSolved = false;
   const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
   const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
   const choices = (answer, distractors) => shuffle([...new Set([answer, ...distractors])]);
   function shell(board) {
     document.title = `${title} · Class ${grade} · Mathsversity`;
-    root.innerHTML = `<div class="tool-head"><div><p class="eyebrow">CLASS ${grade} · ${topic.toUpperCase()}</p><h1>${title}</h1><p>${intro}</p></div><div class="score-pill"><span>Score</span><strong id="score">${score}</strong></div></div><div class="tool-board">${board}</div><div class="tool-actions"><button class="tool-btn" id="checkTool" type="button">Check answer</button><button class="tool-btn secondary" id="resetTool" type="button">New round</button><span class="feedback" id="feedback">Make your move.</span></div>`;
+    root.innerHTML = `<div class="tool-head"><div><p class="eyebrow">CLASS ${grade} · ${topic.toUpperCase()}</p><h1>${title}</h1><p>${intro}</p></div><div class="score-pill"><span>Score</span><strong id="score">${score}</strong><small class="score-meta" id="scoreMeta">Streak 0 · Tries 0</small></div></div><div class="tool-board">${board}</div><div class="tool-actions"><button class="tool-btn" id="checkTool" type="button">Check answer</button><button class="tool-btn secondary" id="resetTool" type="button">New round</button><span class="feedback" id="feedback">Make your move.</span></div>`;
     window.mathsversityLibraries?.ready.then(() => window.mathsversityEnhanceTool?.(root));
   }
-  function feedback(message, good) { const el = document.getElementById("feedback"); el.textContent = message; el.className = `feedback ${good ? "good" : "try"}`; }
-  function award(message) { score += 1; document.getElementById("score").textContent = score; window.mathsversityFreemium?.consumeHeart(); feedback(message, true); window.mathsversityCelebrate?.(); }
+  function updateRunStats() { const meta = document.getElementById("scoreMeta"); if (meta) meta.textContent = `Streak ${streak} · Tries ${tries}`; }
+  function feedback(message, good) { const el = document.getElementById("feedback"); el.textContent = message; el.className = `feedback ${good ? "good" : "try"}`; if (!good) { tries += 1; streak = 0; updateRunStats(); } }
+  function award(message) { if (roundSolved) return; roundSolved = true; score += 1; streak += 1; document.getElementById("score").textContent = score; updateRunStats(); const checkButton = document.getElementById("checkTool"); if (checkButton) { checkButton.disabled = true; checkButton.textContent = "Solved!"; } window.mathsversityFreemium?.consumeHeart(); feedback(message, true); window.mathsversityCelebrate?.(); }
   function mountSymmetryCanvas(answer, onSelect) {
     const host = document.querySelector("#symmetryCanvas");
     if (!host || !window.p5) return;
@@ -71,7 +75,7 @@
       p.noLoop();
     });
   }
-  function bind(check) { document.getElementById("checkTool").onclick = check; document.getElementById("resetTool").onclick = () => render(); }
+  function bind(check) { roundSolved = false; document.getElementById("checkTool").onclick = check; document.getElementById("resetTool").onclick = () => render(); }
   function selectChoices(answer, labels = (x) => x) { document.querySelectorAll(".choice").forEach((button) => button.onclick = () => { document.querySelectorAll(".choice").forEach((item) => item.classList.remove("selected")); button.classList.add("selected"); }); bind(() => Number(document.querySelector(".choice.selected")?.dataset.answer) === answer ? award(`Correct — the answer is ${labels(answer)}.`) : feedback("Try again: use the information in the question.", false)); }
   function arrayBuilder() { const rows = rand(2, 5), cols = rand(2, 6); let r = 0, c = 0; shell(`<div class="prompt-card"><strong>Build ${rows} rows of ${cols}</strong><span>Rows × columns = ?</span></div><div class="choice-row"><button class="choice add-row">Add row</button><button class="choice add-col">Add column</button></div><div class="array-grid" id="arrayGrid"></div><div class="feedback">Rows: <strong id="rowRead">0</strong> · Columns: <strong id="colRead">0</strong> · Product: <strong id="productRead">0</strong></div>`); const draw = () => { document.getElementById("arrayGrid").innerHTML = Array.from({length:r}, () => `<div class="array-row">${Array.from({length:c}, () => '<i></i>').join("")}</div>`).join(""); document.getElementById("rowRead").textContent=r; document.getElementById("colRead").textContent=c; document.getElementById("productRead").textContent=r*c; }; document.querySelector(".add-row").onclick=()=>{if(r<6)r++;draw()}; document.querySelector(".add-col").onclick=()=>{if(c<8)c++;draw()}; bind(()=>r===rows&&c===cols?award(`${rows} × ${cols} = ${rows*cols}.`):feedback(`Build exactly ${rows} rows and ${cols} columns.`,false)); }
   function multiplication() { const a=rand(3,9), b=rand(2,10), answer=a*b; shell(`<div class="prompt-card"><strong>${a} × ${b} = ?</strong><span>Choose the product to move your kart.</span></div><div class="race-track"><span>🏁</span><i style="width:${Math.min(90, a*b/90*100)}%"></i>🏎️</div><div class="choice-row">${choices(answer,[answer+a,answer-b,answer+10]).map(n=>`<button class="choice" data-answer="${n}">${n}</button>`).join("")}</div>`); selectChoices(answer); }
